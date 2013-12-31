@@ -1,5 +1,3 @@
-" Configurations collected over the web, works well for me on Mavericks and
-" Ubuntu.
 " - Step 1: Place this file on ${HOME}/.vimrc
 " - Step 2: Install Pathogen for modules loading
 " mkdir -p ~/.vim/autoload ~/.vim/bundle
