@@ -83,3 +83,5 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set makeprg=/usr/local/bin/node\ %            " set make to node
+set autowrite                                 " automatic write before make
+
