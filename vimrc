@@ -18,7 +18,7 @@
 "   git clone https://github.com/MarcWeber/vim-addon-mw-utils.git ~/.vim/bundle/vim-addon-mw-utils
 "   git clone https://github.com/garbas/vim-snipmate.git ~/.vim/bundle/vim-snipmate
 "   git clone https://github.com/honza/vim-snippets.git ~/.vim/bundle/vim-snippets
-"   git clone https://github.com/scrooloose/snipmate-snippets.git ~/vim/bundle/snipmate-snippets.git
+"   git clone https://github.com/scrooloose/snipmate-snippets.git ~/.vim/bundle/snipmate-snippets.git
 "   git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
 "   git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/fugitive
 "
