@@ -1,34 +1,3 @@
-" - Step 1: Place this file on ${HOME}/.vimrc
-" - Step 2: Install Pathogen for modules loading
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl -so ~/.vim/autoload/pathogen.vim \
-"   https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-" - Step 3: Install additional modules
-"   git clone https://github.com/moll/vim-node.git ~/.vim/bundle/node
-"   git clone https://github.com/godlygeek/tabular.git ~/.vim/bundle/tabular
-"   git clone https://github.com/pangloss/vim-javascript.git ~/.vim/bundle/vim-javascript
-"   git clone https://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade
-"   git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script
-"   git clone https://github.com/wavded/vim-stylus.git ~/.vim/bundle/vim-stylus
-"   git clone https://github.com/groenewege/vim-less.git ~/.vim/bundle/vim-less
-"   git clone https://github.com/tpope/vim-surround.git ~/.vim/bundle/vim-surround
-"   git clone https://github.com/scrooloose/nerdcommenter.git ~/.vim/bundle/nerdcommenter
-"   git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
-"   git clone https://github.com/tomtom/tlib_vim.git ~/.vim/bundle/tlib_vim
-"   git clone https://github.com/MarcWeber/vim-addon-mw-utils.git ~/.vim/bundle/vim-addon-mw-utils
-"   git clone https://github.com/garbas/vim-snipmate.git ~/.vim/bundle/vim-snipmate
-"   git clone https://github.com/honza/vim-snippets.git ~/.vim/bundle/vim-snippets
-"   git clone https://github.com/scrooloose/snipmate-snippets.git ~/.vim/bundle/snipmate-snippets.git
-"   git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
-"   git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/fugitive
-"
-" Some testing:
-" - Listing loaded plugins
-" :scriptnames
-"
-" - Listing available commands:
-" :command
-"
 set nocompatible                              " use VIM settings
 set backspace=indent,eol,start                " allow backspace
 set history=1000                              " number of commands in history
@@ -44,7 +13,6 @@ call pathogen#infect()                        " call pathogen
 filetype plugin on                            " load file type plugin
 filetype indent on                            " load file indent plugin
 syntax on                                     " enable syntax
-set scrolloff=999                             " cursor will be always in the middle of the window
 set encoding=utf-8                            " sets the character encoding
 colorscheme elflord                           " seting color theme
 set mouse=a                                   " set all mouse modes
@@ -84,4 +52,4 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set makeprg=/usr/local/bin/node\ %            " set make to node
 set autowrite                                 " automatic write before make
-
+set directory=~/tmp                           " save swp in ~/tmp
