@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: need to check for more detailed compiler and python environment
+
 checkReturn() {
   if [ $? -ne 0 ]
   then
