@@ -11,8 +11,10 @@ checkReturn() {
 }
 
 
-COMMANDS="vim git curl"
-for comm in ${COMMANDS}
+VPKGDIR="~/.vim/bundle"
+
+commands="vim git curl cmake g++ make gcc"
+for comm in ${commands}
 do
   echo -n "- Checking for ${comm}..."
   which ${comm}
@@ -20,7 +22,7 @@ do
 done
 
 echo -n "- Basic Setup..."
-mkdir -p ~/.vim/autoload ~/.vim/bundle
+mkdir -p ~/.vim/autoload ${VPKGDIR}
 curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 checkReturn
 
@@ -42,17 +44,22 @@ honza/vim-snippets
 scrooloose/snipmate-snippets
 scrooloose/syntastic
 tpope/vim-fugitive
+Valloric/YouCompleteMe
 "
 echo "- Starting packages clonning:"
 for package in $PACKAGES
 do
   echo -en "\t$package..."
-  git clone https://github.com/${package}.git ~/.vim/bundle/${package#*/} > /dev/null 2>&1
+  git clone https://github.com/${package}.git ${VPKGDIR}/${package#*/} > /dev/null 2>&1
   checkReturn
 done
 
+echo "- Special configuration for YouCompleteMe"
+cd ${VPKGDIR}/YouCompleteMe
+git submodule update --init --recursive
+./install.sh
+
 curl -so ~/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vimrc
 checkReturn
-
 
 echo done
