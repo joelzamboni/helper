@@ -53,3 +53,5 @@ nnoremap <C-H> <C-W><C-H>
 set makeprg=/usr/local/bin/node\ %            " set make to node
 set autowrite                                 " automatic write before make
 set directory=~/tmp                           " save swp in ~/tmp
+" Ctrl+B to run the current file
+nmap <C-B> :!./%<cr>
