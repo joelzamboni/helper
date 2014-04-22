@@ -4,7 +4,7 @@
 
 echo -n '- GIT Username: '
 read username
-echo -n '- GIT Email; '
+echo -n '- GIT Email: '
 read email
 
 git config --global user.name username

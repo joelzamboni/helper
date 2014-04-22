@@ -13,19 +13,19 @@ checkReturn() {
 }
 
 
-VPKGDIR="~/.vim/bundle"
+VPKGDIR="${HOME}/.vim/bundle"
 
 commands="vim git curl cmake g++ make gcc"
 for comm in ${commands}
 do
   echo -n "- Checking for ${comm}..."
-  which ${comm}
+  which ${comm} > /dev/null
   checkReturn
 done
 
 echo -n "- Basic Setup..."
-mkdir -p ~/.vim/autoload ${VPKGDIR}
-curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+mkdir -p ${HOME}/.vim/autoload ${VPKGDIR}
+curl -so ${HOME}/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 checkReturn
 
 PACKAGES="
@@ -61,7 +61,7 @@ cd ${VPKGDIR}/YouCompleteMe
 git submodule update --init --recursive
 ./install.sh
 
-curl -so ~/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vimrc
+curl -so ${HOME}/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vimrc
 checkReturn
 
 echo done
