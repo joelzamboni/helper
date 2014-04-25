@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# TODO: need to check for more detailed compiler and python environment
+# TODO: Check for build-essential
+# TODO: Check for python-dev
 
 checkReturn() {
   if [ $? -ne 0 ]
@@ -24,8 +25,10 @@ do
 done
 
 echo -n "- Basic Setup..."
+[ -d ${HOME}/.vim ] && echo "please remove ${HOME}/.vim before continue" && exit 1
 mkdir -p ${HOME}/.vim/autoload ${VPKGDIR}
 curl -so ${HOME}/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+[ ! -d ${HOME}/tmp ] && mkdir ${HOME}/tmp && checkReturn
 checkReturn
 
 PACKAGES="
