@@ -28,7 +28,7 @@ echo -n "- Basic Setup..."
 [ -d ${HOME}/.vim ] && echo "please remove ${HOME}/.vim before continue" && exit 1
 mkdir -p ${HOME}/.vim/autoload ${VPKGDIR}
 curl -so ${HOME}/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-[ ! -d ${HOME}/tmp ] && mkdir ${HOME}/tmp && checkReturn
+[ ! -d ${HOME}/tmp ] && mkdir ${HOME}/tmp || echo ...
 checkReturn
 
 PACKAGES="
