@@ -56,7 +56,7 @@ export HADOOP_COMMON_HOME=\$HADOOP_INSTALL
 export HADOOP_HDFS_HOME=\$HADOOP_INSTALL
 export YARN_HOME=\$HADOOP_INSTALL
 export HADOOP_COMMON_LIB_NATIVE_DIR=\$HADOOP_INSTALL/lib/native
-export HADOOP_OPTS="-Djava.library.path=\$HADOOP_INSTALL/lib -XX:-PrintWarnings"
+export HADOOP_OPTS="-Djava.library.path=\$HADOOP_INSTALL/lib/native"
 EOF
 
   ${HDUC} sed -i 's:^export JAVA_HOME=.*:export JAVA_HOME='${JAVA_HOME}':' ${HDHOME}/etc/hadoop/hadoop-env.sh
@@ -111,6 +111,10 @@ EOF
   <property>
     <name>dfs.datanode.data.dir</name>
     <value>file:${HDDATA}/hdfs/datanode</value>
+  </property>
+  <property>
+    <name>dfs.namenode.secondary.http-address   </name>
+    <value>localhost:50090</value>
   </property>
 </configuration>
 EOF
