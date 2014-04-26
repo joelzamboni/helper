@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# TODO: remove the 'debug mode'
+# TODO: add the creation of 64 bits native libraries (mvn package -Pdist,native -DskipTests -Dtar)
+
+
 set -x
 
 HDU='hduser'
@@ -113,7 +117,7 @@ EOF
     <value>file:${HDDATA}/hdfs/datanode</value>
   </property>
   <property>
-    <name>dfs.namenode.secondary.http-address   </name>
+    <name>dfs.namenode.secondary.http-address</name>
     <value>localhost:50090</value>
   </property>
 </configuration>
@@ -137,7 +141,4 @@ install_hadoop
 basic_config
 hadoop_config
 data_dir
-
-
-
 
