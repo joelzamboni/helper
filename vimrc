@@ -4,8 +4,8 @@ set history=1000                              " number of commands in history
 set wrap                                      " dont wrap lines
 set linebreak                                 " wrap lines at convenient points
 set smartindent                               " smart autoindenting when starting a new line
-set shiftwidth=2                              " number of spaces to use for each step of (auto)indent
-set tabstop=2                                 " number of spaces that a Tab in the file counts for
+set shiftwidth=4                              " number of spaces to use for each step of (auto)indent
+set tabstop=4                                 " number of spaces that a Tab in the file counts for
 set expandtab                                 " use spaces to insert a Tab
 set smarttab                                  " insert or delete (backspace) Tabs
 set autoindent                                " copy indent from current line when starting a new line
