@@ -54,5 +54,5 @@ set makeprg=/usr/local/bin/node\ %                               " set make to n
 set autowrite                                                    " automatic write before make
 set directory=~/tmp                                              " save swp in ~/tmp
 " Ctrl+B to run the current file
-nmap <C-B> :!./%<cr>
+nmap <C-B> :w <cr> :!./%<cr>
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown        " md files as markdown

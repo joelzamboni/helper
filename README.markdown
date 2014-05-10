@@ -1,4 +1,4 @@
-helper
+helper (work in progress) :P
 ======
 
 Some files that I use in my workflow that I can share. Basically two scripts that works well with Ubuntu 14.04. Please install the basics: build-essential, vim, cmake, curl, and git.
