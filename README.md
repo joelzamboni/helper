@@ -11,3 +11,7 @@ Setups VIM with some nice plugins.
 ## git.sh 
 
 Just a reminder to setup the local GIT
+
+# [Grip](https://github.com/joeyespo/grip)
+
+Very cool utility for Markdown conversion.
