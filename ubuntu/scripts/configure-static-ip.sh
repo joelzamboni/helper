@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # Just to configure static IP on ubuntu
+# TODO: disable network manager
+
 
 echo -n 'IP Address: '
 read ip
@@ -21,4 +23,7 @@ netmask ${netmask}
 gateway ${gw}
 dns-nameserver 8.8.8.8 8.8.4.4
 EOF
+
+
+
 
