@@ -58,11 +58,6 @@ do
   checkReturn
 done
 
-# echo "- Special configuration for YouCompleteMe"
-# cd ${VPKGDIR}/YouCompleteMe
-# git submodule update --init --recursive
-# ./install.sh
-
 curl -so ${HOME}/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vim/vimrc
 checkReturn
 
