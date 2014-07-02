@@ -16,7 +16,7 @@ checkReturn() {
 
 VPKGDIR="${HOME}/.vim/bundle"
 
-commands="vim git curl cmake g++ make gcc"
+commands="vim git curl"
 for comm in ${commands}
 do
   echo -n "- Checking for ${comm}..."
@@ -27,7 +27,7 @@ done
 echo -n "- Basic Setup..."
 [ -d ${HOME}/.vim ] && echo "please remove ${HOME}/.vim before continue" && exit 1
 mkdir -p ${HOME}/.vim/autoload ${VPKGDIR}
-wget -O "${HOME}/.vim/autoload/pathogen.vim" "https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+curl -so "${HOME}/.vim/autoload/pathogen.vim" "https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
 [ ! -d ${HOME}/tmp ] && mkdir ${HOME}/tmp || echo ...
 checkReturn
 
@@ -49,7 +49,6 @@ honza/vim-snippets
 scrooloose/snipmate-snippets
 scrooloose/syntastic
 tpope/vim-fugitive
-Valloric/YouCompleteMe
 "
 echo "- Starting packages clonning:"
 for package in $PACKAGES
@@ -59,12 +58,12 @@ do
   checkReturn
 done
 
-echo "- Special configuration for YouCompleteMe"
-cd ${VPKGDIR}/YouCompleteMe
-git submodule update --init --recursive
-./install.sh
+# echo "- Special configuration for YouCompleteMe"
+# cd ${VPKGDIR}/YouCompleteMe
+# git submodule update --init --recursive
+# ./install.sh
 
-wget -O ${HOME}/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vim/vimrc
+curl -so ${HOME}/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vim/vimrc
 checkReturn
 
 echo done
