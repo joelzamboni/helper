@@ -21,6 +21,7 @@ export KEY_NAME=VPN
 export KEY_OU=VPN
 export KEY_ALTNAMES=VPN
 
+sudo su -
 
 cd /etc/openvpn/easy-rsa/
 source vars
@@ -31,7 +32,7 @@ source vars
 ./build-dh
 
 cd keys/
-cp ${server_name}.crt ${server_name}.key ca.crt dh1024.pem /etc/openvpn/
+cp ${server_name}.crt ${server_name}.key ca.crt dh2048.pem /etc/openvpn/
 
 # Server Configuration
 # TODO: create the file server.conf inside the script
@@ -67,6 +68,27 @@ source vars
 # Copy the following files to the client
 #   /etc/openvpn/ca.crt
 #   /etc/openvpn/easy-rsa/keys/client1.crt
-#   /etc/openvpn/easy-rsa/keys/client1.ke
+#   /etc/openvpn/easy-rsa/keys/client1.key
+
+mkdir /root/vpnclient
+cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/client1.crt /etc/openvpn/easy-rsa/keys/client1.key /root/vpnclient
+cd /root
+tar czvf vpnclient.tar.gz vpnclient
+rm -fr vpnclient
 
 
+# /etc/openvpn/client.conf
+client
+proto udp
+dev tun
+remote my-server-1 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert client1.crt
+key client1.key
+ns-cert-type server
+comp-lzo
+verb 3
