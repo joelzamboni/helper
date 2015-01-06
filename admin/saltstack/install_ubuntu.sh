@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 
 
-# Master
-sudo add-apt-repository ppa:saltstack/salt
+sudo add-apt-repository ppa:saltstack/salt -y
 sudo apt-get update
-sudo apt-get install salt-master python-software-properties salt-minion salt-syndic
+
+# Master
+sudo apt-get install salt-master python-software-properties salt-minion salt-syndic -y
 
 # Minion
-sudo add-apt-repository ppa:saltstack/salt
-sudo apt-get update
-sudo apt-get install python-software-properties salt-minion
-
-
+sudo apt-get install python-software-properties salt-minion -y 
