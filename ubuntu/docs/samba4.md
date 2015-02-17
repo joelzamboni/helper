@@ -23,5 +23,14 @@ To:
 ```
 LABEL=FILESYTEM_LABEL  / ext4 user_xattr,acl,barrier=1,errors=remount-ro,relatime 0 1
 ```
+Run:
+```
+sudo mount -a
+```
+
+Install Samba Packages
+```
+sudo apt-get install samba krb5-user smbclient
+```
 
 
