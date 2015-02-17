@@ -1,0 +1,7 @@
+
+
+ip=
+netmask=
+gw=
+dns=
+
