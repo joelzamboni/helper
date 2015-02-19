@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# NOT READY
+
+# TODO: create full file with all parameters
 
 # Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
 
@@ -9,7 +10,6 @@ sudo apt-get install openvpn easy-rsa
 sudo mkdir /etc/openvpn/easy-rsa/
 sudo cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
 
-# TODO: create full file with all parameters
 # Check this parameters in the file /etc/openvpn/easy-rsa/vars
 export KEY_COUNTRY="US"
 export KEY_PROVINCE="NC"

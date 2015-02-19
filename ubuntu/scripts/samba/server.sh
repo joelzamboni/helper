@@ -4,7 +4,7 @@ source config.sh
 
 
 sudo apt-get update
-sudo apt-get dist-upgrade
+sudo apt-get dist-upgrade -y
 
 
 cat << EOF | sudo -u root tee /etc/hosts
