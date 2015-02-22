@@ -1,14 +1,39 @@
 #!/usr/bin/env bash
 
-# TODO: create full file with all parameters
-
 # Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
 
 server_name="this is the server name"
+country="US"
+province="VA"
+city="Reston"
+org="Company"
+email="email@mail.com"
 
-sudo apt-get install openvpn easy-rsa
+sudo apt-get install -y openvpn easy-rsa
 sudo mkdir /etc/openvpn/easy-rsa/
 sudo cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
+
+cat << EOF | sudo -u root tee /etc/openvpn/easy-rsa/vars
+
+export EASY_RSA="`pwd`"
+export OPENSSL="openssl"
+export PKCS11TOOL="pkcs11-tool"
+export GREP="grep"
+export KEY_CONFIG=`$EASY_RSA/whichopensslcnf $EASY_RSA`
+export KEY_DIR="$EASY_RSA/keys"
+echo NOTE: If you run ./clean-all, I will be doing a rm -rf on $KEY_DIR
+export PKCS11_MODULE_PATH="dummy"
+export PKCS11_PIN="dummy"
+export KEY_SIZE=2048
+export CA_EXPIRE=3650
+export KEY_EXPIRE=3650
+export KEY_COUNTRY="US"
+export KEY_PROVINCE="CA"
+export KEY_CITY="SanFrancisco"
+export KEY_ORG="Fort-Funston"
+export KEY_EMAIL="me@myhost.mydomain"
+export KEY_OU="MyOrganizationalUnit"
+export KEY_NAME="EasyRSA"
 
 # Check this parameters in the file /etc/openvpn/easy-rsa/vars
 export KEY_COUNTRY="US"
@@ -20,6 +45,8 @@ export KEY_CN=VPN
 export KEY_NAME=VPN
 export KEY_OU=VPN
 export KEY_ALTNAMES=VPN
+
+EOF
 
 sudo su -
 

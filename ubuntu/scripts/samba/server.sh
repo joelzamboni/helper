@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
+
+# TODO: add kerberos client parameters 
+
+
 source config.sh
+[ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
+export PATH
 
-
-sudo apt-get update
-sudo apt-get dist-upgrade -y
-
-
-cat << EOF | sudo -u root tee /etc/hosts
+cat << EOF > /etc/hosts
 127.0.0.1 localhost
 127.0.0.1 ${hostname}.${domainname} ${hostname}
 ${ip} ${hostname}.${domainname} ${hostname}
@@ -21,7 +23,7 @@ ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 EOF
 
-cat << EOF | sudo -u root tee /etc/network/interfaces
+cat << EOF > /etc/network/interfaces
 # /etc/network/interfaces
 auto lo
 iface lo inet loopback
@@ -34,6 +36,14 @@ gateway ${gw}
 dns-nameserver ${ip}
 EOF
 
+echo ${hostname} > /etc/hostname
+hostname ${hostname}
+
+apt-get update
+apt-get dist-upgrade -y
+apt-get install -y ntp acl samba krb5-user smbclient
 
 
+rm /etc/samba/smb.conf
 
+samba-tool domain provision --realm ${domainname} --domain ${netbiosdomain} --server-role=dc --use-rfc2307 --option="dns forwarder = ${dns_forwarder}" --adminpass ${administrator_password}
