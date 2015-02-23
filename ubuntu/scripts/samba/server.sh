@@ -41,7 +41,7 @@ hostname ${hostname}
 
 apt-get update
 apt-get dist-upgrade -y
-apt-get install -y ntp acl samba krb5-user smbclient
+apt-get install -y ntp acl samba krb5-user smbclient cups
 
 
 rm /etc/samba/smb.conf
