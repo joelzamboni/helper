@@ -8,44 +8,35 @@ province="VA"
 city="Reston"
 org="Company"
 email="email@mail.com"
+easy_rsa_dir="/etc/openvpn/easy-rsa"
+ou="Tech"
 
 sudo apt-get install -y openvpn easy-rsa
 sudo mkdir /etc/openvpn/easy-rsa/
 sudo cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
 
 cat << EOF | sudo -u root tee /etc/openvpn/easy-rsa/vars
-
-export EASY_RSA="`pwd`"
+export EASY_RSA=${easy_rsa_dir}
 export OPENSSL="openssl"
 export PKCS11TOOL="pkcs11-tool"
 export GREP="grep"
-export KEY_CONFIG=`$EASY_RSA/whichopensslcnf $EASY_RSA`
-export KEY_DIR="$EASY_RSA/keys"
-echo NOTE: If you run ./clean-all, I will be doing a rm -rf on $KEY_DIR
+export KEY_CONFIG=$(${easy_rsa_dir}/whichopensslcnf ${easy_rsa_dir})
+export KEY_DIR=${easy_rsa_dir}/keys
 export PKCS11_MODULE_PATH="dummy"
 export PKCS11_PIN="dummy"
 export KEY_SIZE=2048
 export CA_EXPIRE=3650
 export KEY_EXPIRE=3650
-export KEY_COUNTRY="US"
-export KEY_PROVINCE="CA"
-export KEY_CITY="SanFrancisco"
-export KEY_ORG="Fort-Funston"
-export KEY_EMAIL="me@myhost.mydomain"
-export KEY_OU="MyOrganizationalUnit"
-export KEY_NAME="EasyRSA"
-
-# Check this parameters in the file /etc/openvpn/easy-rsa/vars
-export KEY_COUNTRY="US"
-export KEY_PROVINCE="NC"
-export KEY_CITY="Winston-Salem"
-export KEY_ORG="Example Company"
-export KEY_EMAIL="steve@example.com"
+export KEY_COUNTRY=${country}
+export KEY_PROVINCE=${province}
+export KEY_CITY=${city}
+export KEY_ORG=${org}
+export KEY_EMAIL=${email}
+export KEY_OU=${ou}
+export KEY_NAME="OpenVPN"
 export KEY_CN=VPN
 export KEY_NAME=VPN
-export KEY_OU=VPN
 export KEY_ALTNAMES=VPN
-
 EOF
 
 sudo su -

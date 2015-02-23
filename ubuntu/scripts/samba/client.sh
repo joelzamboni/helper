@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
 
-
-# TODO: add kerberos client parameters 
-# TODO: add /etc/hosts configuration check
+# TODO: add pam-auth-update
+# TODO: automate domain join
 
 source config.sh
 [ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
 export PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
 export DEBIAN_FRONTEND=noninteractive
-
+client_ip=$(ip route get 8.8.8.8|grep 8.8.8.8 |awk '{print $NF}')
 
 apt-get update
 apt-get dist-upgrade -y
 apt-get install -y ntp winbind samba krb5-user smbclient cifs-utils libnss-winbind libpam-winbind cups
 
+cat << EOF > /etc/hosts
+127.0.0.1 localhost
+127.0.0.1 $(hostname).${domainname} $(hostname)
+${client_ip} $(hostname).${domainname} $(hostname)
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+EOF
 
-cat << EOF > /etc/samba/smb.con
+cat << EOF > /etc/samba/smb.conf
 [global]
         security = ads
         realm = ${domainname}
@@ -59,7 +70,7 @@ EOF
 
 cat << EOF > /etc/krb5.conf
 [libdefaults]
-        default_realm = LOCALDOMAIN.COM
+        default_realm = $(echo $domainname | tr 'a-z' 'A-Z')
         krb4_config = /etc/krb.conf
         krb4_realms = /etc/krb.realms
         kdc_timesync = 1
@@ -68,12 +79,12 @@ cat << EOF > /etc/krb5.conf
         proxiable = true
         fcc-mit-ticketflags = true
 [realms]
-        LOCALDOMAIN.COM = {
-                kdc = SAMBA.LOCALDOMAIN.COM
-                admin_server = SAMBA.LOCALDOMAIN.COM
+        $(echo $domainname | tr 'a-z' 'A-Z') = {
+                kdc = $(echo ${hostname}.${domainname} | tr 'a-z' 'A-Z')
+                admin_server = $(echo ${hostname}.${domainname} | tr 'a-z' 'A-Z') 
         }
 [domain_realm]
-        .localdomain.com = LOCALDOMAIN.COM
+        .${domainname} = $(echo $domainname | tr 'a-z' 'A-Z')
 [login]
         krb4_convert = true
         krb4_get_tickets = false
