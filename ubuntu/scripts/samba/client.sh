@@ -80,8 +80,8 @@ cat << EOF > /etc/krb5.conf
         fcc-mit-ticketflags = true
 [realms]
         $(echo $domainname | tr 'a-z' 'A-Z') = {
-                kdc = $(echo ${hostname}.${domainname} | tr 'a-z' 'A-Z')
-                admin_server = $(echo ${hostname}.${domainname} | tr 'a-z' 'A-Z') 
+                kdc = $(echo $(hostname).${domainname} | tr 'a-z' 'A-Z')
+                admin_server = $(echo $(hostname).${domainname} | tr 'a-z' 'A-Z') 
         }
 [domain_realm]
         .${domainname} = $(echo $domainname | tr 'a-z' 'A-Z')
