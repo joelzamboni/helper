@@ -11,11 +11,14 @@ email="email@mail.com"
 easy_rsa_dir="/etc/openvpn/easy-rsa"
 ou="Tech"
 
-sudo apt-get install -y openvpn easy-rsa
-sudo mkdir /etc/openvpn/easy-rsa/
-sudo cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
+[ $(id -u) != 0 ] && echo 'please use root' && exit 1
 
-cat << EOF | sudo -u root tee /etc/openvpn/easy-rsa/vars
+
+apt-get install -y openvpn easy-rsa
+mkdir /etc/openvpn/easy-rsa/
+cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
+
+cat << EOF > /etc/openvpn/easy-rsa/vars
 export EASY_RSA=${easy_rsa_dir}
 export OPENSSL="openssl"
 export PKCS11TOOL="pkcs11-tool"
@@ -39,7 +42,6 @@ export KEY_NAME=VPN
 export KEY_ALTNAMES=VPN
 EOF
 
-sudo su -
 
 cd /etc/openvpn/easy-rsa/
 source vars
@@ -56,6 +58,7 @@ cp ${server_name}.crt ${server_name}.key ca.crt dh2048.pem /etc/openvpn/
 # TODO: create the file server.conf inside the script
 # /etc/openvpn/server.conf
 
+cat << EOF > /etc/openvpn/server.conf
 port 1194
 proto udp
 dev tun
@@ -75,10 +78,12 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-client-cert-not-required
-plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
-# Client configuration# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
+# client-cert-not-required
+# plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 
+EOF
+
+# Client configuration# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
 cd /etc/openvpn/easy-rsa/
 source vars
 ./build-key client1
@@ -91,15 +96,14 @@ source vars
 mkdir /root/vpnclient
 cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/client1.crt /etc/openvpn/easy-rsa/keys/client1.key /root/vpnclient
 cd /root
-tar czvf vpnclient.tar.gz vpnclient
-rm -fr vpnclient
 
 
 # /etc/openvpn/client.conf
+cat << EOF > /root/openvpn/client.conf
 client
 proto udp
 dev tun
-remote my-server-1 1194
+remote ${server_remote} 1194
 resolv-retry infinite
 nobind
 persist-key
@@ -110,3 +114,6 @@ key client1.key
 ns-cert-type server
 comp-lzo
 verb 3
+EOF
+tar czvf vpnclient.tar.gz vpnclient
+rm -fr vpnclient
