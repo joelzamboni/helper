@@ -2,6 +2,7 @@
 
 # TODO: add pam-auth-update
 # TODO: automate domain join (net ads join -U administrator)
+# TODO: fix mkhomedir
 
 source config.sh
 [ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
