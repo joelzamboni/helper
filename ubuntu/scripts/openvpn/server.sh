@@ -13,6 +13,13 @@ easy_rsa_dir="/etc/openvpn/easy-rsa"
 ou="Tech"
 port="11111"
 
+# Running on LXC notes
+# lxc.cgroup.devices.allow = c 10:200 rwm
+# mkdir /dev/net 
+# mknod /dev/net/tun c 10 200 
+# chmod 666 /dev/net/tun
+
+
 [ $(id -u) != 0 ] && echo 'please use root' && exit 1
 
 
