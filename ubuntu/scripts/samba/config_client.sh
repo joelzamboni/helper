@@ -1,0 +1,4 @@
+
+ip=
+domainname=
+netbiosdomain=
