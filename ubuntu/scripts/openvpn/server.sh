@@ -10,6 +10,7 @@ org="Company"
 email="email@mail.com"
 easy_rsa_dir="/etc/openvpn/easy-rsa"
 ou="Tech"
+port="11111"
 
 [ $(id -u) != 0 ] && echo 'please use root' && exit 1
 
@@ -59,7 +60,7 @@ cp ${server_name}.crt ${server_name}.key ca.crt dh2048.pem /etc/openvpn/
 # /etc/openvpn/server.conf
 
 cat << EOF > /etc/openvpn/server.conf
-port 1194
+port ${port}
 proto udp
 dev tun
 ca ca.crt
@@ -103,7 +104,7 @@ cat << EOF > /root/openvpn/client.conf
 client
 proto udp
 dev tun
-remote ${server_remote} 1194
+remote ${server_remote} ${port}
 resolv-retry infinite
 nobind
 persist-key
@@ -115,5 +116,6 @@ ns-cert-type server
 comp-lzo
 verb 3
 EOF
+
 tar czvf vpnclient.tar.gz vpnclient
 rm -fr vpnclient
