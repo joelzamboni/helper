@@ -45,6 +45,7 @@ EOF
 
 
 cd /etc/openvpn/easy-rsa/
+ln -s openssl-1.0.0.cnf openssl.cnf
 source vars
 ./clean-all
 ./build-ca
