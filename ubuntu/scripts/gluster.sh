@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# intial notes on gluster
-
+# initial notes on gluster
+# reference https://www.digitalocean.com/community/tutorials/how-to-create-a-redundant-storage-pool-using-glusterfs-on-ubuntu-servers
 # Running on containers
 lxc.cgroup.devices.allow = c 10:229 rwm 
 mknod /dev/fuse c 10 229  
