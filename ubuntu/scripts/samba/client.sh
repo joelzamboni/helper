@@ -92,4 +92,9 @@ cat << EOF > /etc/krb5.conf
         krb4_get_tickets = false
 EOF
 
+cat << EOF > /etc/resolvconf/resolv.conf.d/base
+nameserver $ip
+search $domainname
+EOF
+
 
