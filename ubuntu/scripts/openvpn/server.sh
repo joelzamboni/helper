@@ -3,6 +3,7 @@
 # Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
 
 server_name="this is the server name"
+server_remote="remote IP"
 country="US"
 province="VA"
 city="Reston"
@@ -57,7 +58,6 @@ cd keys/
 cp ${server_name}.crt ${server_name}.key ca.crt dh2048.pem /etc/openvpn/
 
 # Server Configuration
-# TODO: create the file server.conf inside the script
 # /etc/openvpn/server.conf
 
 cat << EOF > /etc/openvpn/server.conf
