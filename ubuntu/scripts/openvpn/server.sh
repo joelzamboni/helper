@@ -101,7 +101,7 @@ cd /root
 
 
 # /etc/openvpn/client.conf
-cat << EOF > /root/openvpn/client.conf
+cat << EOF > /root/vpnclient/client.conf
 client
 proto udp
 dev tun
