@@ -88,7 +88,7 @@ persist-tun
 status openvpn-status.log
 verb 3
 # client-cert-not-required
-# plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
+plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 
 EOF
 
@@ -123,6 +123,8 @@ key client1.key
 ns-cert-type server
 comp-lzo
 verb 3
+auth-user-pass
+auth-retry interact
 EOF
 
 tar czvf vpnclient.tar.gz vpnclient
