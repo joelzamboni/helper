@@ -5,7 +5,8 @@
 # TODO: fix mkhomedir
 # TODO: add cache credentials (sudo apt-get install libpam-ccreds)
 
-source config.sh
+source config_client.sh
+
 [ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
 export PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
 export DEBIAN_FRONTEND=noninteractive
