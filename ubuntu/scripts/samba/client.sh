@@ -2,8 +2,6 @@
 
 # TODO: add pam-auth-update
 # TODO: automate domain join (net ads join -U administrator)
-# TODO: fix mkhomedir
-# TODO: add cache credentials (sudo apt-get install libpam-ccreds)
 
 source config_client.sh
 
@@ -14,7 +12,7 @@ client_ip=$(ip route get 8.8.8.8|grep 8.8.8.8 |awk '{print $NF}')
 
 apt-get update
 apt-get dist-upgrade -y
-apt-get install -y ntp winbind samba krb5-user smbclient cifs-utils libnss-winbind libpam-winbind cups acl
+apt-get install -y ntp winbind samba krb5-user smbclient cifs-utils libnss-winbind libpam-winbind cups acl libpam-ccreds
 
 cat << EOF > /etc/hosts
 127.0.0.1 localhost
