@@ -11,7 +11,7 @@ org="Company"
 email="email@mail.com"
 easy_rsa_dir="/etc/openvpn/easy-rsa"
 ou="Tech"
-port="11111"
+port=""
 
 # Running on LXC notes
 # lxc.cgroup.devices.allow = c 10:200 rwm
