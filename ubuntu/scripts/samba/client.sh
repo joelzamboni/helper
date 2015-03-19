@@ -13,7 +13,7 @@ client_ip=$(ip route get 8.8.8.8|grep 8.8.8.8 |awk '{print $NF}')
 
 apt-get update
 apt-get dist-upgrade -y
-apt-get install -y ntp winbind samba krb5-user smbclient cifs-utils libnss-winbind libpam-winbind cups
+apt-get install -y ntp winbind samba krb5-user smbclient cifs-utils libnss-winbind libpam-winbind cups acl
 
 cat << EOF > /etc/hosts
 127.0.0.1 localhost
