@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-
-# TODO: add kerberos client parameters 
-
-
 source config.sh
 [ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
 PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
@@ -46,4 +42,9 @@ apt-get install -y ntp acl samba krb5-user smbclient cups
 
 rm /etc/samba/smb.conf
 
-samba-tool domain provision --realm ${domainname} --domain ${netbiosdomain} --server-role=dc --use-rfc2307 --option="dns forwarder = ${dns_forwarder}" --adminpass ${administrator_password}
+echo TODO: samba-tool command
+
+# samba-tool domain provision --realm ${domainname} --domain ${netbiosdomain} --server-role=dc --use-rfc2307 --option="dns forwarder = ${dns_forwarder}" --adminpass ${administrator_password}
+
+# samba-tool domain join ${domainname} DC -Uadministrator --realm ${domainname} --option="dns forwarder = ${dns_forwarder}"
+
