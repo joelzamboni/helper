@@ -96,4 +96,9 @@ nameserver $ip
 search $domainname
 EOF
 
-
+cat << EOF > /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+[SeatDefaults]
+user-session=ubuntu
+allow-guest=false
+greeter-show-manual-login=true
+EOF
