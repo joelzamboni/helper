@@ -2,8 +2,8 @@
 
 source config.sh
 [ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
-PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
-export PATH
+export PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
+export DEBIAN_FRONTEND=noninteractive
 
 cat << EOF > /etc/hosts
 127.0.0.1 localhost
