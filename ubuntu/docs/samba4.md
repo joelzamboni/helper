@@ -34,3 +34,12 @@ sudo apt-get install samba krb5-user smbclient
 ```
 
 
+ net ads keytab add nfs -U Administrator
+
+References:
+
+http://grokbase.com/t/centos/centos/1365qnen7k/samba4-and-nvsv4
+
+
+
+
