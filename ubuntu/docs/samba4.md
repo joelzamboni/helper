@@ -40,6 +40,8 @@ References:
 
 http://grokbase.com/t/centos/centos/1365qnen7k/samba4-and-nvsv4
 
+https://access.redhat.com/discussions/497493
+net ads join -U someuser%password
 
 
 
