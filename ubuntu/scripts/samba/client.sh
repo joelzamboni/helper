@@ -66,7 +66,7 @@ Priority: 0
 Session-Type: Additional
 Session-Interactive-Only: yes
 Session:
-	optional			pam_mkhomedir.so
+        optional                        pam_mkhomedir.so
 EOF
 
 cat << EOF > /etc/krb5.conf
