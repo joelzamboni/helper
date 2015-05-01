@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-
+sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:saltstack/salt -y
 sudo apt-get update
 
