@@ -15,8 +15,8 @@ port=""
 
 # Running on LXC notes
 # lxc.cgroup.devices.allow = c 10:200 rwm
-# mkdir /dev/net 
-# mknod /dev/net/tun c 10 200 
+# mkdir /dev/net
+# mknod /dev/net/tun c 10 200
 # chmod 666 /dev/net/tun
 
 

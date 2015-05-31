@@ -23,7 +23,3 @@ netmask ${netmask}
 gateway ${gw}
 dns-nameserver 8.8.8.8 8.8.4.4
 EOF
-
-
-
-
