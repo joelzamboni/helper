@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+
+echo "Please check the server configuration"
+echo "Remote Server: "
+read remote_server
+echo "Remote Port: "
+read remote_port
+
+# Running on LXC notes
+# lxc.cgroup.devices.allow = c 10:200 rwm
+# mkdir /dev/net
+# mknod /dev/net/tun c 10 200
+# chmod 666 /dev/net/tun
+
 # Client configuration# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
 cd /etc/openvpn/easy-rsa/
 source vars

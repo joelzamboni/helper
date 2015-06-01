@@ -19,6 +19,6 @@ openssl x509 -req -days 365 -in ${DOMAIN}.csr -signkey ${DOMAIN}.key -out ${DOMA
 
 # Display information for Amazon
 echo Private
-openssl rsa -in ${DOMAIN} -text
+openssl rsa -in ${DOMAIN}.key -text
 echo Public
 openssl x509 -inform PEM -in ${DOMAIN}.crt
