@@ -12,6 +12,7 @@ email="email@mail.com"
 easy_rsa_dir="/etc/openvpn/easy-rsa"
 ou="Tech"
 port=""
+client=""
 
 # Running on LXC notes
 # lxc.cgroup.devices.allow = c 10:200 rwm
@@ -103,7 +104,7 @@ source vars
 #   /etc/openvpn/easy-rsa/keys/client1.key
 
 mkdir /root/vpnclient
-cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/client1.crt /etc/openvpn/easy-rsa/keys/client1.key /root/vpnclient
+cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/${client}.crt /etc/openvpn/easy-rsa/keys/${client}.key /root/vpnclient
 cd /root
 
 
@@ -118,8 +119,8 @@ nobind
 persist-key
 persist-tun
 ca ca.crt
-cert client1.crt
-key client1.key
+cert ${client}.crt
+key ${client}.key
 ns-cert-type server
 comp-lzo
 verb 3
