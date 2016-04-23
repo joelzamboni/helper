@@ -12,6 +12,7 @@ email="email@mail.com"
 easy_rsa_dir="/etc/openvpn/easy-rsa"
 ou="Tech"
 port=""
+client=""
 
 # Running on LXC notes
 # lxc.cgroup.devices.allow = c 10:200 rwm
@@ -23,7 +24,7 @@ port=""
 [ $(id -u) != 0 ] && echo 'please use root' && exit 1
 
 
-apt-get install -y openvpn easy-rsa
+apt-get install -y openvpn easy-rsa zip
 mkdir /etc/openvpn/easy-rsa/
 cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
 
@@ -87,23 +88,16 @@ persist-key
 persist-tun
 status openvpn-status.log
 verb 3
-# client-cert-not-required
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
-
 EOF
 
 # Client configuration# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
 cd /etc/openvpn/easy-rsa/
 source vars
-./build-key client1
-
-# Copy the following files to the client
-#   /etc/openvpn/ca.crt
-#   /etc/openvpn/easy-rsa/keys/client1.crt
-#   /etc/openvpn/easy-rsa/keys/client1.key
+./build-key ${client}
 
 mkdir /root/vpnclient
-cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/client1.crt /etc/openvpn/easy-rsa/keys/client1.key /root/vpnclient
+cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/${client}.crt /etc/openvpn/easy-rsa/keys/${client}.key /root/vpnclient
 cd /root
 
 
@@ -118,8 +112,8 @@ nobind
 persist-key
 persist-tun
 ca ca.crt
-cert client1.crt
-key client1.key
+cert ${client}.crt
+key ${client}.key
 ns-cert-type server
 comp-lzo
 verb 3
@@ -127,5 +121,5 @@ auth-user-pass
 auth-retry interact
 EOF
 
-tar czvf vpnclient.tar.gz vpnclient
+zip -r ${client}.zip vpnclient
 rm -fr vpnclient
