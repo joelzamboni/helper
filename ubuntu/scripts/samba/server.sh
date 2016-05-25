@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source config.sh
+source server_config.sh
 [ $(id -u) != 0 ] && echo 'please execute as super user' && exit 1
 export PATH=/sbin:/usr/sbin:/bin:/usr/bin:${PATH}
 export DEBIAN_FRONTEND=noninteractive
