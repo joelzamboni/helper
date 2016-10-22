@@ -7,7 +7,6 @@ export DEBIAN_FRONTEND=noninteractive
 
 cat << EOF > /etc/hosts
 127.0.0.1 localhost
-127.0.0.1 ${hostname}.${domainname} ${hostname}
 ${ip} ${hostname}.${domainname} ${hostname}
 
 # The following lines are desirable for IPv6 capable hosts
@@ -32,19 +31,21 @@ gateway ${gw}
 dns-nameserver ${ip}
 EOF
 
-echo ${hostname} > /etc/hostname
-hostname ${hostname}
+echo ${hostname}.${domainname} > /etc/hostname
+hostname ${hostname}.${domainname}
 
 apt-get update
 apt-get dist-upgrade -y
-apt-get install -y ntp acl samba krb5-user smbclient cups
+apt-get install -y ntp acl samba krb5-user smbclient cups winbind
 
 
 rm /etc/samba/smb.conf
 
+systemctl unmask samba-ad-dc.service
+
 echo TODO: samba-tool command
 
-# samba-tool domain provision --realm ${domainname} --domain ${netbiosdomain} --server-role=dc --use-rfc2307 --option="dns forwarder = ${dns_forwarder}" --adminpass ${administrator_password}
+# samba-tool domain provision --realm ${domainname^^} --domain ${netbiosdomain^^} --server-role=dc --use-rfc2307 --option="dns forwarder = ${dns_forwarder}"  --option="interfaces=lo eth0" --option="bind interfaces only=yes" --adminpass ${administrator_password}
 
-# samba-tool domain join ${domainname} DC -Uadministrator --realm ${domainname} --option="dns forwarder = ${dns_forwarder}"
+# samba-tool domain join ${domainname^^} DC -Uadministrator --realm ${domainname^^} --option="dns forwarder = ${dns_forwarder}" --option="interfaces=lo eth0" --option="bind interfaces only=yes" 
 
