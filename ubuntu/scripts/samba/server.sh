@@ -49,3 +49,4 @@ echo TODO: samba-tool command
 
 # samba-tool domain join ${domainname^^} DC -Uadministrator --realm ${domainname^^} --option="dns forwarder = ${dns_forwarder}" --option="interfaces=lo eth0" --option="bind interfaces only=yes" 
 
+ln -sf /var/lib/samba/private/krb5.conf /etc
