@@ -91,6 +91,8 @@ verb 3
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 EOF
 
+update-rc.d openvpn enable
+
 # Client configuration
 cd /etc/openvpn/easy-rsa/
 source vars
