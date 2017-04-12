@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
+# Server Ports: 1194/udp
 
 server_name="this is the server name"
 server_remote="remote IP"
@@ -91,18 +91,17 @@ verb 3
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 EOF
 
-# Client configuration# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
+# Client configuration
 cd /etc/openvpn/easy-rsa/
 source vars
 ./build-key ${client}
 
-mkdir /root/vpnclient
-cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/${client}.crt /etc/openvpn/easy-rsa/keys/${client}.key /root/vpnclient
-cd /root
+mkdir -p /root/vpnclient
+cd /root/vpnclient
 
 
 # /etc/openvpn/client.conf
-cat << EOF > /root/vpnclient/client.conf
+cat << EOF > /root/vpnclient/${client}.ovpn
 client
 proto udp
 dev tun
@@ -111,15 +110,19 @@ resolv-retry infinite
 nobind
 persist-key
 persist-tun
-ca ca.crt
-cert ${client}.crt
-key ${client}.key
 ns-cert-type server
 comp-lzo
 verb 3
 auth-user-pass
 auth-retry interact
-EOF
 
-zip -r ${client}.zip vpnclient
-rm -fr vpnclient
+EOF
+echo "<ca>" >> ${client}.ovpn
+cat /etc/openvpn/ca.crt >> ${client}.ovpn
+echo "</ca>" >> ${client}.ovpn
+echo "<cert>" >> ${client}.ovpn
+cat /etc/openvpn/easy-rsa/keys/${client}.crt >> ${client}.ovpn
+echo "</cert>" >> ${client}.ovpn
+echo "<key>" >> ${client}.ovpn
+cat /etc/openvpn/easy-rsa/keys/${client}.key >> ${client}.ovpn
+echo "</key>" >> ${client}.ovpn
