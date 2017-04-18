@@ -4,6 +4,8 @@
 # https://community.openvpn.net/openvpn/wiki/GettingStartedwithOVPN
 # https://community.openvpn.net/openvpn/wiki/Hardening
 
+# TODO: Test batch mode (--batch)
+# https://github.com/QueuingKoala/easyrsa3/blob/master/doc/EasyRSA-Advanced.md
 
 # Server Ports: 1194/udp
 
