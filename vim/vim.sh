@@ -3,6 +3,8 @@
 # TODO: Check for build-essential
 # TODO: Check for python-dev
 
+sudo apt-get install build-essential cmake python-dev python3-dev
+
 checkReturn() {
   if [ $? -ne 0 ]
   then
@@ -49,6 +51,7 @@ honza/vim-snippets
 scrooloose/snipmate-snippets
 scrooloose/syntastic
 tpope/vim-fugitive
+Valloric/YouCompleteMe
 "
 echo "- Starting packages clonning:"
 for package in $PACKAGES
