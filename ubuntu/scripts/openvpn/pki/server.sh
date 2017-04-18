@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# TODO: Add TLS
+# https://community.openvpn.net/openvpn/wiki/GettingStartedwithOVPN
+# https://community.openvpn.net/openvpn/wiki/Hardening
+
+
 # Server Ports: 1194/udp
 
 server_name="this is the server name"
