@@ -30,7 +30,7 @@ echo -n "- Basic Setup..."
 [ -d ${HOME}/.vim ] && echo "please remove ${HOME}/.vim before continue" && exit 1
 mkdir -p ${HOME}/.vim/autoload ${VPKGDIR}
 curl -so "${HOME}/.vim/autoload/pathogen.vim" "https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
-[ ! -d ${HOME}/tmp ] && mkdir ${HOME}/tmp || echo ...
+[ ! -d ${HOME}/tmp ] && mkdir ${HOME}/tmp || echo -n ...
 checkReturn
 
 PACKAGES="
@@ -63,5 +63,10 @@ done
 
 curl -so ${HOME}/.vimrc https://raw.githubusercontent.com/joelzamboni/helper/master/vim/vimrc
 checkReturn
+
+# Custom Install YouCompleteMe
+cd ${HOME}/.vim/bundle 
+git submodule update --init --recursive
+./install.py
 
 echo done
