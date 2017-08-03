@@ -21,8 +21,7 @@ gpg --batch --use-agent --decrypt vault_passphrase.gpg
 Create `~/.bash_gpg_agent`
 ```
 envfile="${HOME}/.gnupg/gpg-agent.env"
- 
-if test -f "$envfile" && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
+ if test -f "$envfile" && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
     eval "$(cat "$envfile")"
 else
     eval "$(gpg-agent --daemon --log-file=~/.gpg/gpg.log --write-env-file "$envfile")"
