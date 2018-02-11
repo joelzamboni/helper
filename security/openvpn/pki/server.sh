@@ -1,25 +1,15 @@
 #!/usr/bin/env bash
 
-# TODO: Add TLS
-# https://community.openvpn.net/openvpn/wiki/GettingStartedwithOVPN
-# https://community.openvpn.net/openvpn/wiki/Hardening
-
-# TODO: Test batch mode (--batch)
-# https://github.com/QueuingKoala/easyrsa3/blob/master/doc/EasyRSA-Advanced.md
-
-# Server Ports: 1194/udp
-
-server_name="this is the server name"
-server_remote="remote IP"
+server_name="openvpn"
+server_remote="server.apps.com"
 country="US"
 province="VA"
 city="Reston"
 org="Company"
-email="email@mail.com"
-pki_dir="/etc/openvpn/test"
+email="info@webera.com"
+pki_dir="/etc/openvpn/webera"
 ou="Tech"
-port=""
-client=""
+port="1194"
 
 # Running on LXC notes
 # lxc.cgroup.devices.allow = c 10:200 rwm
@@ -54,9 +44,6 @@ export KEY_ORG=${org}
 export KEY_EMAIL=${email}
 export KEY_OU=${ou}
 export KEY_NAME="OpenVPN"
-export KEY_CN=VPN
-export KEY_NAME=VPN
-export KEY_ALTNAMES=VPN
 EOF
 
 
@@ -64,8 +51,8 @@ cd ${pki_dir}
 ln -s openssl-1.0.0.cnf openssl.cnf
 source vars
 ./clean-all
-./build-ca
-./build-key-server ${server_name}
+./build-ca --batch
+./build-key-server --batch ${server_name}
 
 ./build-dh
 
@@ -100,38 +87,3 @@ EOF
 
 update-rc.d openvpn enable
 
-# Client configuration
-cd /etc/openvpn/easy-rsa/
-source vars
-./build-key ${client}
-
-mkdir -p /root/vpnclient
-cd /root/vpnclient
-
-
-# /etc/openvpn/client.conf
-cat << EOF > /root/vpnclient/${client}.ovpn
-client
-proto udp
-dev tun
-remote ${server_remote} ${port}
-resolv-retry infinite
-nobind
-persist-key
-persist-tun
-ns-cert-type server
-comp-lzo
-verb 3
-auth-user-pass
-auth-retry interact
-
-EOF
-echo "<ca>" >> ${client}.ovpn
-cat /etc/openvpn/ca.crt >> ${client}.ovpn
-echo "</ca>" >> ${client}.ovpn
-echo "<cert>" >> ${client}.ovpn
-cat /etc/openvpn/easy-rsa/keys/${client}.crt >> ${client}.ovpn
-echo "</cert>" >> ${client}.ovpn
-echo "<key>" >> ${client}.ovpn
-cat /etc/openvpn/easy-rsa/keys/${client}.key >> ${client}.ovpn
-echo "</key>" >> ${client}.ovpn
