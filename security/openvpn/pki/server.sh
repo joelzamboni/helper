@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 
-server_name="openvpn"
-server_remote="server.apps.com"
-country="US"
-province="VA"
-city="Reston"
-org="Company"
-email="info@webera.com"
-pki_dir="/etc/openvpn/webera"
-ou="Tech"
-port="1194"
+source config.sh
 
 # Running on LXC notes
 # lxc.cgroup.devices.allow = c 10:200 rwm

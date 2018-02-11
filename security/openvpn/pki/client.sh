@@ -1,22 +1,10 @@
 #!/usr/bin/env bash
 
+source config.sh
 
-echo "Please check the server configuration"
-echo "Remote Server: "
-read remote_server
-echo "Remote Port: "
-read remote_port
-
-# Running on LXC notes
-# lxc.cgroup.devices.allow = c 10:200 rwm
-# mkdir /dev/net
-# mknod /dev/net/tun c 10 200
-# chmod 666 /dev/net/tun
-
-# Client configuration# Server Ports: 22/tcp, 443/tcp, 943/tcp, 1194/udp
-cd /etc/openvpn/easy-rsa/
+cd ${pki_dir}
 source vars
-./build-key client1
+./build-key $1
 
 # Copy the following files to the client
 #   /etc/openvpn/ca.crt
@@ -24,7 +12,7 @@ source vars
 #   /etc/openvpn/easy-rsa/keys/client1.key
 
 mkdir /root/vpnclient
-cp /etc/openvpn/ca.crt /etc/openvpn/easy-rsa/keys/client1.crt /etc/openvpn/easy-rsa/keys/client1.key /root/vpnclient
+cp /etc/openvpn/ca.crt ${pki_dir}/keys/$1.crt ${pki_dir}/keys/$1.key /root/vpnclient
 cd /root
 
 
