@@ -59,6 +59,9 @@ source vars
 cd keys/
 cp ${server_name}.crt ${server_name}.key ca.crt dh2048.pem /etc/openvpn/
 
+openvpn --genkey --secret /etc/openvpn/ta.key
+
+
 # Server Configuration
 # /etc/openvpn/server.conf
 
@@ -70,6 +73,7 @@ ca ca.crt
 cert ${server_name}.crt
 key ${server_name}.key
 dh dh2048.pem
+tls-auth ta.key
 server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 # additional routes
