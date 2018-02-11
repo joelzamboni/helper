@@ -16,7 +16,7 @@ province="VA"
 city="Reston"
 org="Company"
 email="email@mail.com"
-easy_rsa_dir="/etc/openvpn/easy-rsa"
+pki_dir="/etc/openvpn/test"
 ou="Tech"
 port=""
 client=""
@@ -32,16 +32,16 @@ client=""
 
 
 apt-get install -y openvpn easy-rsa zip
-mkdir /etc/openvpn/easy-rsa/
-cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
+mkdir ${pki_dir}
+cp -r /usr/share/easy-rsa/* ${pki_dir}
 
-cat << EOF > /etc/openvpn/easy-rsa/vars
-export EASY_RSA=${easy_rsa_dir}
+cat << EOF > ${pki_dir}/vars
+export EASY_RSA=${pki_dir}
 export OPENSSL="openssl"
 export PKCS11TOOL="pkcs11-tool"
 export GREP="grep"
-export KEY_CONFIG=$(${easy_rsa_dir}/whichopensslcnf ${easy_rsa_dir})
-export KEY_DIR=${easy_rsa_dir}/keys
+export KEY_CONFIG=\`${pki_dir}/whichopensslcnf ${pki_dir}\`
+export KEY_DIR=${pki_dir}/keys
 export PKCS11_MODULE_PATH="dummy"
 export PKCS11_PIN="dummy"
 export KEY_SIZE=2048
@@ -60,7 +60,7 @@ export KEY_ALTNAMES=VPN
 EOF
 
 
-cd /etc/openvpn/easy-rsa/
+cd ${pki_dir}
 ln -s openssl-1.0.0.cnf openssl.cnf
 source vars
 ./clean-all
