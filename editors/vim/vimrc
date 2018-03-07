@@ -45,6 +45,7 @@ set clipboard=unnamedplus                                        " use X11 clipb
 " Customization to modules
 " open NERDTree with <ne>
 nmap ne :NERDTree<cr>
+nmap nc :NERDTreeClose<cr>
 " improved split navegation Ctrl+key, instead of Ctrl+w+key
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
